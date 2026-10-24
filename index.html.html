@@ -1,0 +1,1336 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Java Lab Portfolio by K.Harika: weekly Java laboratory experiments and assignments.">
+<title>Java Lab Portfolio | K.Harika</title>
+<style>
+:root{--bg:#0b1020;--c:#141b34;--c2:#1b2446;--t:#e8ecff;--m:#93a0d1;--a:#7c9cff;--b:#ff7ad9;--bd:#27315c}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:radial-gradient(circle at 20% -10%,#1d2a5c,transparent 45%),var(--bg);color:var(--t);min-height:100vh}
+nav{position:sticky;top:0;z-index:5;background:#0b1020e6;backdrop-filter:blur(8px);border-bottom:1px solid var(--bd);display:flex;align-items:center;gap:14px;padding:10px 20px}
+nav .br{font-weight:700;color:var(--t);text-decoration:none;white-space:nowrap}nav .br span{color:var(--a)}
+.chips{display:flex;gap:6px;overflow:auto;flex:1;scrollbar-width:none}
+.chips a{color:var(--m);text-decoration:none;padding:6px 11px;border-radius:999px;font-size:13px;white-space:nowrap;border:1px solid transparent}
+.chips a:hover,.chips a.on{color:#fff;background:var(--c2);border-color:var(--a)}
+main{max-width:1000px;margin:0 auto;padding:26px 18px 60px}
+.hero{display:flex;gap:28px;align-items:center;background:linear-gradient(135deg,var(--c),var(--c2));border:1px solid var(--bd);border-radius:22px;padding:30px;flex-wrap:wrap}
+.pic{width:170px;height:170px;border-radius:50%;object-fit:cover;border:4px solid transparent;background:linear-gradient(var(--c),var(--c)) padding-box,linear-gradient(135deg,var(--a),var(--b)) border-box}
+.hero h1{margin:0;font-size:34px}.hero h1 span{background:linear-gradient(90deg,var(--a),var(--b));-webkit-background-clip:text;color:transparent}
+.hero p{color:var(--m);margin:6px 0 14px}.tags{display:flex;gap:8px;flex-wrap:wrap}
+.tags b{font-weight:500;background:#0b1020;border:1px solid var(--bd);border-radius:8px;padding:6px 11px;font-size:13px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:18px 0}
+.stats div{background:var(--c);border:1px solid var(--bd);border-radius:14px;padding:16px;text-align:center}
+.stats big{display:block;font-size:26px;color:var(--a)}.stats small{color:var(--m)}
+h2{margin:26px 0 12px}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
+.card{display:block;background:var(--c);border:1px solid var(--bd);border-radius:16px;padding:18px;color:var(--t);text-decoration:none;transition:.2s}
+.card:hover{transform:translateY(-4px);border-color:var(--a);box-shadow:0 10px 30px #7c9cff22}
+.card small{color:var(--b);font-weight:600;letter-spacing:.05em}.card h3{margin:6px 0;font-size:17px}.card p{margin:0;color:var(--m);font-size:13px}
+.crumb{color:var(--m);font-size:13px;margin-bottom:10px}.crumb a{color:var(--a);text-decoration:none}
+pre{background:#060a18;border:1px solid var(--bd);border-radius:12px;padding:16px;overflow:auto;font-size:13px;line-height:1.55;color:#cfe0ff;margin:0}
+.out{color:#7dffb0;border-left:3px solid #7dffb0}.bar{display:flex;justify-content:space-between;align-items:center;margin:16px 0 8px;color:var(--m);font-size:13px;text-transform:uppercase;letter-spacing:.08em}
+button{font:inherit;background:var(--c2);color:var(--t);border:1px solid var(--bd);border-radius:9px;padding:7px 13px;cursor:pointer}button:hover{border-color:var(--a)}
+.pn{display:flex;justify-content:space-between;margin-top:22px;gap:8px}
+table{border-collapse:collapse;width:100%;display:block;overflow:auto;font-size:13px}td,th{border:1px solid var(--bd);padding:9px;background:var(--c)}th{background:var(--c2);color:var(--a)}
+code{background:var(--c2);padding:2px 6px;border-radius:5px}li{margin:8px 0}
+footer{text-align:center;color:var(--m);font-size:12px;padding:20px}
+@media(max-width:600px){.hero{padding:20px;text-align:center;justify-content:center}.hero h1{font-size:27px}.tags{justify-content:center}}
+</style></head><body>
+<nav><a class="br" href="#home">☕ <span>K.Harika</span></a><div class="chips" id="ch"></div></nav>
+<main id="m"></main><footer>Java Lab Portfolio · K.Harika · 25EU02087</footer>
+<script>
+const P=(t,c,o)=>({t,c,o});
+const W={
+1:{t:'Comparative Table',h:`<table><tr><th>Feature</th><th>Java</th><th>C</th><th>C++</th><th>Python</th><th>JavaScript</th></tr>
+<tr><td>Paradigm</td><td>OOP</td><td>Procedural</td><td>OOP + Procedural</td><td>Multi-paradigm</td><td>Multi-paradigm, event-driven</td></tr>
+<tr><td>Typing</td><td>Static</td><td>Static</td><td>Static</td><td>Dynamic</td><td>Dynamic</td></tr>
+<tr><td>Execution</td><td>Compiled to bytecode, runs on JVM</td><td>Compiled to machine code</td><td>Compiled to machine code</td><td>Interpreted</td><td>Interpreted / JIT</td></tr>
+<tr><td>Memory</td><td>Garbage collector</td><td>Manual</td><td>Manual</td><td>Garbage collector</td><td>Garbage collector</td></tr>
+<tr><td>Pointers</td><td>No</td><td>Yes</td><td>Yes</td><td>No</td><td>No</td></tr>
+<tr><td>Platform independent</td><td>Yes (JVM)</td><td>No</td><td>No</td><td>Yes</td><td>Yes (browser/Node)</td></tr>
+<tr><td>Multiple inheritance</td><td>Via interfaces</td><td>N/A</td><td>Yes</td><td>Yes</td><td>Via mixins</td></tr>
+<tr><td>Typical use</td><td>Enterprise, Android, backend</td><td>Systems, embedded</td><td>Games, systems</td><td>AI/ML, scripting</td><td>Web front/back end</td></tr></table>`},
+2:{t:'JDK Installation',h:`<h3>Program 1: Oracle JDK Installation (Windows)</h3><ol><li>Download the Windows x64 installer from oracle.com/java.</li><li>Run the .exe and click Next through the wizard.</li><li>Set JAVA_HOME to the JDK folder (System Properties → Environment Variables).</li><li>Add %JAVA_HOME%\\bin to Path.</li><li>Verify with <code>java -version</code> and <code>javac -version</code>.</li></ol>
+<h3>Program 2: OpenJDK Installation (Windows)</h3><ol><li>Download the OpenJDK zip (e.g. from jdk.java.net or Adoptium).</li><li>Extract to C:\\Java\\openjdk.</li><li>Set JAVA_HOME to that folder.</li><li>Add %JAVA_HOME%\\bin to Path.</li><li>Open a new Command Prompt and run <code>java -version</code>.</li></ol>`},
+3:{t:'Basics',p:[
+P('Hello, Java!',String.raw`public class Hello {
+    public static void main(String[] args) {
+        System.out.println("Hello, Java!");
+    }
+}`,'Hello, Java!'),
+P('Data Types',String.raw`public class DataTypes {
+    public static void main(String[] args) {
+        byte b = 10; short s = 200; int i = 3000; long l = 90000L;
+        float f = 5.5f; double d = 9.99; char c = 'K'; boolean flag = true;
+        System.out.println(b + " " + s + " " + i + " " + l);
+        System.out.println(f + " " + d + " " + c + " " + flag);
+    }
+}`,'10 200 3000 90000\n5.5 9.99 K true'),
+P('Integer Arithmetic',String.raw`public class IntOps {
+    public static void main(String[] args) {
+        int a = 20, b = 6;
+        System.out.println("Sum = " + (a + b));
+        System.out.println("Difference = " + (a - b));
+        System.out.println("Product = " + (a * b));
+        System.out.println("Quotient = " + (a / b));
+        System.out.println("Remainder = " + (a % b));
+    }
+}`,'Sum = 26\nDifference = 14\nProduct = 120\nQuotient = 3\nRemainder = 2'),
+P('Floating-Point Arithmetic',String.raw`public class FloatOps {
+    public static void main(String[] args) {
+        double a = 7.5, b = 2.5;
+        System.out.println("Sum = " + (a + b));
+        System.out.println("Difference = " + (a - b));
+        System.out.println("Product = " + (a * b));
+        System.out.println("Quotient = " + (a / b));
+    }
+}`,'Sum = 10.0\nDifference = 5.0\nProduct = 18.75\nQuotient = 3.0'),
+P('Character and Unicode Value',String.raw`public class CharDemo {
+    public static void main(String[] args) {
+        char ch = 'A';
+        System.out.println("Character: " + ch);
+        System.out.println("ASCII value: " + (int) ch);
+    }
+}`,'Character: A\nASCII value: 65'),
+P('Boolean Expressions',String.raw`public class BoolDemo {
+    public static void main(String[] args) {
+        int a = 10, b = 20;
+        System.out.println(a > b);
+        System.out.println(a < b);
+        System.out.println(a == b);
+        System.out.println(a != b);
+    }
+}`,'false\ntrue\nfalse\ntrue'),
+P('Variables Initialization',String.raw`public class Vars {
+    public static void main(String[] args) {
+        int age = 19; double cgpa = 8.7; String name = "Harika"; char sec = 'B';
+        System.out.println(name + ", " + age + ", " + cgpa + ", " + sec);
+    }
+}`,'Harika, 19, 8.7, B'),
+P('Swap Using Temporary Variable',String.raw`public class Swap {
+    public static void main(String[] args) {
+        int a = 5, b = 9, temp;
+        System.out.println("Before: a=" + a + " b=" + b);
+        temp = a; a = b; b = temp;
+        System.out.println("After: a=" + a + " b=" + b);
+    }
+}`,'Before: a=5 b=9\nAfter: a=9 b=5'),
+P('Widening Type Conversion',String.raw`public class Widening {
+    public static void main(String[] args) {
+        int i = 100; long l = i; float f = l; double d = f;
+        System.out.println(i + " " + l + " " + f + " " + d);
+    }
+}`,'100 100 100.0 100.0'),
+P('Narrowing Type Casting',String.raw`public class Narrowing {
+    public static void main(String[] args) {
+        double d = 9.78; int i = (int) d; byte b = (byte) 300;
+        System.out.println(d + " " + i + " " + b);
+    }
+}`,'9.78 9 44'),
+P('Character and ASCII Conversion',String.raw`public class AsciiConv {
+    public static void main(String[] args) {
+        char c = 'a'; int code = c; char next = (char) 66;
+        System.out.println(c + " -> " + code);
+        System.out.println(66 + " -> " + next);
+    }
+}`,'a -> 97\n66 -> B'),
+P('Even or Odd',String.raw`public class EvenOdd {
+    public static void main(String[] args) {
+        int n = 7;
+        System.out.println(n + (n % 2 == 0 ? " is Even" : " is Odd"));
+    }
+}`,'7 is Odd'),
+P('Largest of Two Numbers',String.raw`public class Largest {
+    public static void main(String[] args) {
+        int a = 25, b = 40;
+        if (a > b) System.out.println(a + " is largest");
+        else System.out.println(b + " is largest");
+    }
+}`,'40 is largest'),
+P('Reserved Keywords',String.raw`public class Keywords {
+    public static void main(String[] args) {
+        String[] k = {"class", "public", "static", "void", "int", "if", "else", "for", "while", "return"};
+        System.out.println("Some Java reserved keywords:");
+        for (String s : k) System.out.println(s);
+    }
+}`,'Some Java reserved keywords:\nclass\npublic\nstatic\nvoid\nint\nif\nelse\nfor\nwhile\nreturn'),
+P('For Loop: 1 to 10',String.raw`public class ForLoop {
+    public static void main(String[] args) {
+        for (int i = 1; i <= 10; i++) System.out.print(i + " ");
+    }
+}`,'1 2 3 4 5 6 7 8 9 10')]},
+4:{t:'No Programs',h:'<p>No programming task was assigned this week.</p>'},
+5:{t:'No Programs',h:'<p>No programming task was assigned this week.</p>'},
+6:{t:'Classes & Objects',p:[
+P('Student Information System',String.raw`class Student {
+    int id = 101; String name = "Harika";
+    void display() { System.out.println(id + " " + name); }
+}
+public class Main {
+    public static void main(String[] args) { new Student().display(); }
+}`,'101 Harika'),
+P('Employee Information System',String.raw`class Employee {
+    int id = 201; String name = "Harika"; double salary = 45000;
+    void display() { System.out.println(id + " " + name + " " + salary); }
+}
+public class Main {
+    public static void main(String[] args) { new Employee().display(); }
+}`,'201 Harika 45000.0'),
+P('Book Details: Multiple Objects',String.raw`class Book {
+    int id; String title, author;
+    Book(int id, String title, String author) { this.id = id; this.title = title; this.author = author; }
+    void display() { System.out.println(id + " " + title + " " + author); }
+}
+public class Main {
+    public static void main(String[] args) {
+        Book b1 = new Book(1, "Java Complete Reference", "Herbert Schildt");
+        Book b2 = new Book(2, "Head First Java", "Kathy Sierra");
+        Book b3 = new Book(3, "Effective Java", "Joshua Bloch");
+        b1.display(); b2.display(); b3.display();
+    }
+}`,'1 Java Complete Reference Herbert Schildt\n2 Head First Java Kathy Sierra\n3 Effective Java Joshua Bloch'),
+P('Array of Student Objects',String.raw`class Student {
+    int id; String name;
+    Student(int id, String name) { this.id = id; this.name = name; }
+}
+public class Main {
+    public static void main(String[] args) {
+        String[] names = {"Harika", "Rishitha", "Anusha", "Meghana", "Sneha"};
+        Student[] s = new Student[5];
+        for (int i = 0; i < 5; i++) s[i] = new Student(101 + i, names[i]);
+        for (Student x : s) System.out.println(x.id + " " + x.name);
+    }
+}`,'101 Harika\n102 Rishitha\n103 Anusha\n104 Meghana\n105 Sneha'),
+P('Reference Assignment',String.raw`class Student { String name; }
+public class Main {
+    public static void main(String[] args) {
+        Student s1 = new Student(); s1.name = "Harika";
+        Student s2 = s1;
+        s2.name = "Rishitha";
+        System.out.println("s1: " + s1.name);
+        System.out.println("s2: " + s2.name);
+    }
+}`,'s1: Rishitha\ns2: Rishitha'),
+P('Comparing Object References',String.raw`class Student { }
+public class Main {
+    public static void main(String[] args) {
+        Student s1 = new Student(), s2 = new Student(), s3 = s1;
+        System.out.println("s1 == s2: " + (s1 == s2));
+        System.out.println("s1 == s3: " + (s1 == s3));
+    }
+}`,'s1 == s2: false\ns1 == s3: true'),
+P('Calculator Using Methods',String.raw`class Calculator {
+    int add(int a, int b) { return a + b; }
+    int sub(int a, int b) { return a - b; }
+    int mul(int a, int b) { return a * b; }
+    int div(int a, int b) { return a / b; }
+}
+public class Main {
+    public static void main(String[] args) {
+        Calculator c = new Calculator();
+        System.out.println("Add = " + c.add(12, 4));
+        System.out.println("Sub = " + c.sub(12, 4));
+        System.out.println("Mul = " + c.mul(12, 4));
+        System.out.println("Div = " + c.div(12, 4));
+    }
+}`,'Add = 16\nSub = 8\nMul = 48\nDiv = 3'),
+P('Rectangle Operations',String.raw`class Rectangle {
+    int l, w;
+    Rectangle(int l, int w) { this.l = l; this.w = w; }
+    int area() { return l * w; }
+    int perimeter() { return 2 * (l + w); }
+}
+public class Main {
+    public static void main(String[] args) {
+        Rectangle r = new Rectangle(8, 5);
+        System.out.println("Area = " + r.area());
+        System.out.println("Perimeter = " + r.perimeter());
+    }
+}`,'Area = 40\nPerimeter = 26'),
+P('Student Constructors',String.raw`class Student {
+    int id; String name;
+    Student() { System.out.println("Default: " + id + " " + name); }
+    Student(int id, String name) { this.id = id; this.name = name; System.out.println("Parameterized: " + id + " " + name); }
+}
+public class Main {
+    public static void main(String[] args) { new Student(); new Student(101, "Harika"); }
+}`,'Default: 0 null\nParameterized: 101 Harika'),
+P('Constructor Overloading',String.raw`class Box {
+    Box() { System.out.println("No arguments"); }
+    Box(int s) { System.out.println("Cube side = " + s); }
+    Box(int l, int w) { System.out.println("Area = " + (l * w)); }
+}
+public class Main {
+    public static void main(String[] args) { new Box(); new Box(4); new Box(4, 6); }
+}`,'No arguments\nCube side = 4\nArea = 24'),
+P('Using this Keyword',String.raw`class Student {
+    int id; String name;
+    Student(int id, String name) { this.id = id; this.name = name; }
+    void display() { System.out.println(this.id + " " + this.name); }
+}
+public class Main {
+    public static void main(String[] args) { new Student(102, "Harika").display(); }
+}`,'102 Harika'),
+P('Constructor Chaining',String.raw`class Emp {
+    Emp() { this("Harika"); System.out.println("Default constructor"); }
+    Emp(String n) { this(n, 50000); System.out.println("One-arg constructor"); }
+    Emp(String n, int s) { System.out.println("Two-arg: " + n + " " + s); }
+}
+public class Main {
+    public static void main(String[] args) { new Emp(); }
+}`,'Two-arg: Harika 50000\nOne-arg constructor\nDefault constructor'),
+P('Demonstrating Garbage Collection',String.raw`public class GCDemo {
+    public static void main(String[] args) {
+        GCDemo obj = new GCDemo();
+        System.out.println("Object created");
+        obj = null;
+        System.out.println("Object eligible for GC");
+        System.gc();
+        System.out.println("System.gc() requested");
+    }
+}`,'Object created\nObject eligible for GC\nSystem.gc() requested'),
+P('Object Eligibility for Garbage Collection',String.raw`public class Eligible {
+    public static void main(String[] args) {
+        Eligible a = new Eligible();
+        a = null;                       // case 1: nullifying
+        System.out.println("Case 1: set to null");
+        Eligible b = new Eligible();
+        b = new Eligible();             // case 2: reassigning
+        System.out.println("Case 2: reassigned");
+        new Eligible();                 // case 3: anonymous object
+        System.out.println("Case 3: anonymous object");
+    }
+}`,'Case 1: set to null\nCase 2: reassigned\nCase 3: anonymous object'),
+P('Method Overloading',String.raw`class Add {
+    int add(int a, int b) { return a + b; }
+    int add(int a, int b, int c) { return a + b + c; }
+    double add(double a, double b) { return a + b; }
+}
+public class Main {
+    public static void main(String[] args) {
+        Add o = new Add();
+        System.out.println(o.add(2, 3));
+        System.out.println(o.add(2, 3, 4));
+        System.out.println(o.add(2.5, 3.5));
+    }
+}`,'5\n9\n6.0'),
+P('Overloading Area Methods',String.raw`class Area {
+    double area(double r) { return 3.14 * r * r; }
+    int area(int l, int b) { return l * b; }
+    int area(int s) { return s * s; }
+}
+public class Main {
+    public static void main(String[] args) {
+        Area a = new Area();
+        System.out.println("Circle = " + a.area(5.0));
+        System.out.println("Rectangle = " + a.area(4, 6));
+        System.out.println("Square = " + a.area(5));
+    }
+}`,'Circle = 78.5\nRectangle = 24\nSquare = 25'),
+P('Passing Student Object',String.raw`class Student {
+    int id; String name;
+    Student(int id, String name) { this.id = id; this.name = name; }
+}
+public class Main {
+    static void show(Student s) { System.out.println(s.id + " " + s.name); }
+    public static void main(String[] args) { show(new Student(101, "Harika")); }
+}`,'101 Harika'),
+P('Comparing Employee Salaries',String.raw`class Employee {
+    String name; double salary;
+    Employee(String n, double s) { name = n; salary = s; }
+}
+public class Main {
+    static void compare(Employee a, Employee b) {
+        Employee h = a.salary > b.salary ? a : b;
+        System.out.println(h.name + " has the higher salary: " + h.salary);
+    }
+    public static void main(String[] args) {
+        compare(new Employee("Harika", 45000), new Employee("Anusha", 52000));
+    }
+}`,'Anusha has the higher salary: 52000.0'),
+P('Returning a Student Object',String.raw`class Student {
+    int id; String name;
+    Student(int id, String name) { this.id = id; this.name = name; }
+}
+public class Main {
+    static Student create() { return new Student(101, "Harika"); }
+    public static void main(String[] args) {
+        Student s = create();
+        System.out.println(s.id + " " + s.name);
+    }
+}`,'101 Harika'),
+P('Returning a Bank Account Object',String.raw`class Account {
+    int no; double balance;
+    Account(int no, double balance) { this.no = no; this.balance = balance; }
+}
+public class Main {
+    static Account deposit(Account a, double amt) { a.balance += amt; return a; }
+    public static void main(String[] args) {
+        Account a = deposit(new Account(1001, 5000), 2500);
+        System.out.println("Account " + a.no + " balance = " + a.balance);
+    }
+}`,'Account 1001 balance = 7500.0'),
+P('Static Variable',String.raw`class Student {
+    static int count = 0;
+    Student() { count++; }
+}
+public class Main {
+    public static void main(String[] args) {
+        new Student(); new Student(); new Student();
+        System.out.println("Objects created: " + Student.count);
+    }
+}`,'Objects created: 3'),
+P('Static Methods',String.raw`public class MathOps {
+    static int square(int n) { return n * n; }
+    static int cube(int n) { return n * n * n; }
+    static int fact(int n) { return n == 0 ? 1 : n * fact(n - 1); }
+    public static void main(String[] args) {
+        System.out.println("Square of 5 = " + square(5));
+        System.out.println("Cube of 3 = " + cube(3));
+        System.out.println("Factorial of 5 = " + fact(5));
+    }
+}`,'Square of 5 = 25\nCube of 3 = 27\nFactorial of 5 = 120'),
+P('Final Keyword',String.raw`final class Base {
+    final int MAX = 100;
+    final void show() { System.out.println("Final method, MAX = " + MAX); }
+}
+public class Main {
+    public static void main(String[] args) {
+        new Base().show();
+        // class Sub extends Base {}  -> error: cannot inherit from final class
+    }
+}`,'Final method, MAX = 100'),
+P('Blank Final Variable',String.raw`class Student {
+    final int id;
+    Student(int id) { this.id = id; }
+}
+public class Main {
+    public static void main(String[] args) {
+        System.out.println("ID = " + new Student(501).id);
+    }
+}`,'ID = 501'),
+P('College and Department: Nested Class',String.raw`class College {
+    String name = "College of Engineering";
+    static class Department {
+        void show() { System.out.println("Department: AI&ML"); }
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        College.Department d = new College.Department();
+        d.show();
+    }
+}`,'Department: AI&ML'),
+P('Employee Address: Nested Class',String.raw`class Employee {
+    String name = "Harika";
+    static class Address {
+        String city = "Hyderabad";
+        void show() { System.out.println("City: " + city); }
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        Employee e = new Employee();
+        Employee.Address a = new Employee.Address();
+        System.out.println("Employee: " + e.name);
+        a.show();
+    }
+}`,'Employee: Harika\nCity: Hyderabad'),
+P('Student Address: Inner Class',String.raw`class StudentAddressInner {
+    String name = "Harika";
+    class Address {
+        void show() { System.out.println(name + " lives in Hyderabad"); }
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        StudentAddressInner s = new StudentAddressInner();
+        StudentAddressInner.Address a = s.new Address();
+        a.show();
+    }
+}`,'Harika lives in Hyderabad'),
+P('Library Management: Inner Class',String.raw`class LibraryBookManager {
+    String library = "Central Library";
+    class Book {
+        String title = "Effective Java";
+        void show() { System.out.println(title + " is in " + library); }
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        LibraryBookManager m = new LibraryBookManager();
+        LibraryBookManager.Book b = m.new Book();
+        b.show();
+    }
+}`,'Effective Java is in Central Library')]},
+7:{t:'Strings & Inheritance',p:[
+P('String Constructors',String.raw`public class StringCons {
+    public static void main(String[] args) {
+        String s1 = "Hello";
+        String s2 = new String("Java");
+        char[] c = {'H', 'a', 'r', 'i'};
+        String s3 = new String(c);
+        byte[] b = {72, 105, 33};
+        String s4 = new String(b);
+        String s5 = new String();
+        System.out.println(s1); System.out.println(s2);
+        System.out.println(s3); System.out.println(s4);
+        System.out.println("Empty length: " + s5.length());
+    }
+}`,'Hello\nJava\nHari\nHi!\nEmpty length: 0'),
+P('StringBuffer Class',String.raw`public class SBDemo {
+    public static void main(String[] args) {
+        StringBuffer sb = new StringBuffer("Java");
+        sb.append(" Lab");           System.out.println(sb);
+        sb.insert(4, " Record");     System.out.println(sb);
+        sb.replace(0, 4, "Core");    System.out.println(sb);
+        sb.delete(4, 11);            System.out.println(sb);
+        sb.reverse();                System.out.println(sb);
+    }
+}`,'Java Lab\nJava Record Lab\nCore Record Lab\nCore Lab\nbaL eroC'),
+P('StringTokenizer Class',String.raw`import java.util.StringTokenizer;
+public class TokenDemo {
+    public static void main(String[] args) {
+        StringTokenizer st = new StringTokenizer("Java is fun to learn");
+        System.out.println("Total tokens: " + st.countTokens());
+        while (st.hasMoreTokens()) System.out.println(st.nextToken());
+        StringTokenizer st2 = new StringTokenizer("red,green,blue", ",");
+        System.out.println("Tokens with delimiter: " + st2.countTokens());
+        while (st2.hasMoreTokens()) System.out.println(st2.nextToken());
+    }
+}`,'Total tokens: 5\nJava\nis\nfun\nto\nlearn\nTokens with delimiter: 3\nred\ngreen\nblue'),
+P('Basic Inheritance',String.raw`class Animal { void eat() { System.out.println("Eating..."); } }
+class Dog extends Animal { void bark() { System.out.println("Barking..."); } }
+public class Main {
+    public static void main(String[] args) {
+        Dog d = new Dog();
+        d.eat(); d.bark();
+    }
+}`,'Eating...\nBarking...'),
+P('Using super Keyword',String.raw`class Parent {
+    int x = 10;
+    void show() { System.out.println("Parent show()"); }
+}
+class Child extends Parent {
+    int x = 20;
+    void display() {
+        System.out.println("Parent x = " + super.x);
+        System.out.println("Child x = " + x);
+        super.show();
+    }
+}
+public class Main {
+    public static void main(String[] args) { new Child().display(); }
+}`,'Parent x = 10\nChild x = 20\nParent show()')]},
+8:{t:'Inheritance',p:[
+P('Single Inheritance',String.raw`class Person { String name = "Harika"; }
+class Student extends Person {
+    String roll = "25EU02087";
+    void display() { System.out.println("Name: " + name); System.out.println("Roll: " + roll); }
+}
+public class Main {
+    public static void main(String[] args) { new Student().display(); }
+}`,'Name: Harika\nRoll: 25EU02087'),
+P('Using super Keyword',String.raw`class Person {
+    String name = "Harika";
+    void greet() { System.out.println("Hello from Person"); }
+}
+class Student extends Person {
+    String name = "Student";
+    void show() {
+        System.out.println(super.name + " / " + name);
+        super.greet();
+    }
+}
+public class Main {
+    public static void main(String[] args) { new Student().show(); }
+}`,'Harika / Student\nHello from Person'),
+P('Multilevel Inheritance',String.raw`class Person { String name = "Harika"; }
+class Employee extends Person { int id = 301; }
+class Manager extends Employee {
+    String dept = "AI&ML";
+    void display() { System.out.println(name + " " + id + " " + dept); }
+}
+public class Main {
+    public static void main(String[] args) { new Manager().display(); }
+}`,'Harika 301 AI&ML'),
+P('Method Overriding',String.raw`class Animal { void sound() { System.out.println("Animal makes a sound"); } }
+class Dog extends Animal { void sound() { System.out.println("Dog barks"); } }
+class Cat extends Animal { void sound() { System.out.println("Cat meows"); } }
+public class Main {
+    public static void main(String[] args) {
+        new Animal().sound(); new Dog().sound(); new Cat().sound();
+    }
+}`,'Animal makes a sound\nDog barks\nCat meows'),
+P('Dynamic Method Dispatch',String.raw`class Shape { void draw() { System.out.println("Drawing Shape"); } }
+class Circle extends Shape { void draw() { System.out.println("Drawing Circle"); } }
+class Rectangle extends Shape { void draw() { System.out.println("Drawing Rectangle"); } }
+class Triangle extends Shape { void draw() { System.out.println("Drawing Triangle"); } }
+public class Main {
+    public static void main(String[] args) {
+        Shape s;
+        s = new Circle();    s.draw();
+        s = new Rectangle(); s.draw();
+        s = new Triangle();  s.draw();
+    }
+}`,'Drawing Circle\nDrawing Rectangle\nDrawing Triangle'),
+P('super with Method Overriding',String.raw`class Person {
+    void display() { System.out.println("Name: Harika"); }
+}
+class Student extends Person {
+    void display() { super.display(); System.out.println("Roll: 25EU02087"); }
+}
+public class Main {
+    public static void main(String[] args) { new Student().display(); }
+}`,'Name: Harika\nRoll: 25EU02087'),
+P('Multilevel Inheritance: Salary Calculation',String.raw`class Employee { int basic = 30000; }
+class Developer extends Employee { int bonus = 10000; }
+class SeniorDeveloper extends Developer {
+    int allowance = 5000;
+    void total() { System.out.println("Total Salary = " + (basic + bonus + allowance)); }
+}
+public class Main {
+    public static void main(String[] args) { new SeniorDeveloper().total(); }
+}`,'Total Salary = 45000'),
+P('Dynamic Method Dispatch: Bank Accounts',String.raw`class BankAccount { void interest() { System.out.println("Generic account"); } }
+class SavingsAccount extends BankAccount {
+    void interest() { System.out.println("Savings interest: " + (10000 * 4 / 100.0)); }
+}
+class CurrentAccount extends BankAccount {
+    void interest() { System.out.println("Current account: no interest"); }
+}
+public class Main {
+    public static void main(String[] args) {
+        BankAccount b;
+        b = new SavingsAccount(); b.interest();
+        b = new CurrentAccount(); b.interest();
+    }
+}`,'Savings interest: 400.0\nCurrent account: no interest'),
+P('Constructor Execution in Multilevel Inheritance',String.raw`class A { A() { System.out.println("A constructor"); } }
+class B extends A { B() { System.out.println("B constructor"); } }
+class C extends B { C() { System.out.println("C constructor"); } }
+public class Main {
+    public static void main(String[] args) { new C(); }
+}`,'A constructor\nB constructor\nC constructor'),
+P('Banking Application Using Inheritance',String.raw`class Account {
+    double balance = 5000;
+    void deposit(double a) { balance += a; System.out.println("Balance after deposit: " + balance); }
+    void withdraw(double a) { balance -= a; System.out.println("Balance after withdraw: " + balance); }
+}
+class SavingsAccount extends Account {
+    void addInterest() {
+        double i = balance * 4 / 100;
+        balance += i;
+        System.out.println("Interest added: " + i);
+        System.out.println("Final balance: " + balance);
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        SavingsAccount s = new SavingsAccount();
+        s.deposit(2000); s.withdraw(500); s.addInterest();
+    }
+}`,'Balance after deposit: 7000.0\nBalance after withdraw: 6500.0\nInterest added: 260.0\nFinal balance: 6760.0')]},
+9:{t:'Packages & Interfaces',p:[
+P('User-Defined Package',String.raw`// File: mypackage/Student.java
+package mypackage;
+public class Student {
+    public void display() { System.out.println("Student Name: Harika"); }
+}
+
+// File: Test.java  (outside the package)
+import mypackage.Student;
+public class Test {
+    public static void main(String[] args) { new Student().display(); }
+}
+
+// Compile & run:  javac -d . mypackage/Student.java
+//                 javac Test.java
+//                 java Test`,'Student Name: Harika'),
+P('Importing Packages',String.raw`// File: college/Student.java
+package college;
+public class Student { public void show() { System.out.println("Student: Harika"); } }
+
+// File: college/Faculty.java
+package college;
+public class Faculty { public void show() { System.out.println("Faculty: Dr. Rao"); } }
+
+// File: Test.java
+import college.Student;   // specific import
+import college.*;         // wildcard import
+public class Test {
+    public static void main(String[] args) {
+        new Student().show();
+        new Faculty().show();
+    }
+}`,'Student: Harika\nFaculty: Dr. Rao'),
+P('Packages and Member Access',String.raw`// File: p1/A.java
+package p1;
+public class A {
+    public int pub = 1; protected int pro = 2; int def = 3; private int pri = 4;
+    public void show() { System.out.println("Same class: " + pub + " " + pro + " " + def + " " + pri); }
+}
+// File: p1/B.java (same package)
+package p1;
+public class B {
+    public void show() { A a = new A(); System.out.println("Same package: " + a.pub + " " + a.pro + " " + a.def); }
+}
+// File: p2/C.java (different package)
+package p2;
+import p1.A;
+public class C {
+    public static void main(String[] args) {
+        A a = new A(); a.show(); new p1.B().show();
+        System.out.println("Different package: " + a.pub);
+    }
+}`,'Same class: 1 2 3 4\nSame package: 1 2 3\nDifferent package: 1'),
+P('Demonstrate CLASSPATH',String.raw`// File: utilities/Calculator.java
+package utilities;
+public class Calculator { public int add(int a, int b) { return a + b; } }
+
+// File: Test.java
+import utilities.Calculator;
+public class Test {
+    public static void main(String[] args) {
+        System.out.println("Sum = " + new Calculator().add(10, 5));
+    }
+}
+
+// javac -d C:\javaclasses utilities/Calculator.java
+// set CLASSPATH=C:\javaclasses;.
+// javac Test.java
+// java Test`,'Sum = 15'),
+P('Package Containing Multiple Classes',String.raw`// File: bank/Account.java
+package bank;
+public class Account { public int no = 1001; }
+// File: bank/Customer.java
+package bank;
+public class Customer { public String name = "Harika"; }
+// File: bank/Transaction.java
+package bank;
+public class Transaction { public void deposit(int a) { System.out.println("Deposit of " + a + " successful"); } }
+
+// File: Main.java
+import bank.*;
+public class Main {
+    public static void main(String[] args) {
+        System.out.println("Customer: " + new Customer().name);
+        System.out.println("Account: " + new Account().no);
+        new Transaction().deposit(2000);
+    }
+}`,'Customer: Harika\nAccount: 1001\nDeposit of 2000 successful'),
+P('Defining and Implementing an Interface',String.raw`interface Shape { double area(); }
+class Circle implements Shape { public double area() { return 3.14 * 5 * 5; } }
+class Rectangle implements Shape { public double area() { return 4 * 6; } }
+public class Main {
+    public static void main(String[] args) {
+        System.out.println("Circle area = " + new Circle().area());
+        System.out.println("Rectangle area = " + new Rectangle().area());
+    }
+}`,'Circle area = 78.5\nRectangle area = 24.0'),
+P('Implementing Multiple Interfaces',String.raw`interface Printable { void print(); }
+interface Showable { void show(); }
+class Demo implements Printable, Showable {
+    public void print() { System.out.println("Printing..."); }
+    public void show() { System.out.println("Showing..."); }
+}
+public class Main {
+    public static void main(String[] args) { Demo d = new Demo(); d.print(); d.show(); }
+}`,'Printing...\nShowing...'),
+P('Interface-Based Polymorphism',String.raw`interface Vehicle { void run(); }
+class Car implements Vehicle { public void run() { System.out.println("Car is running"); } }
+class Bike implements Vehicle { public void run() { System.out.println("Bike is running"); } }
+public class Main {
+    public static void main(String[] args) {
+        Vehicle v;
+        v = new Car();  v.run();
+        v = new Bike(); v.run();
+    }
+}`,'Car is running\nBike is running'),
+P('Variables in Interfaces',String.raw`interface Constants { int MAX_MARKS = 100; double PI = 3.14; }
+class Test implements Constants {
+    void show() { System.out.println("MAX_MARKS = " + MAX_MARKS); System.out.println("PI = " + PI); }
+}
+public class Main {
+    public static void main(String[] args) {
+        new Test().show();
+        System.out.println("Direct: " + Constants.MAX_MARKS);
+    }
+}`,'MAX_MARKS = 100\nPI = 3.14\nDirect: 100'),
+P('Nested Interfaces',String.raw`class University {
+    interface Department { void name(); }
+}
+class Engineering implements University.Department {
+    public void name() { System.out.println("Department: CSE (AI&ML)"); }
+}
+public class Main {
+    public static void main(String[] args) { new Engineering().name(); }
+}`,'Department: CSE (AI&ML)'),
+P('Interface Inheritance',String.raw`interface Animal { void eat(); }
+interface Dog extends Animal { void bark(); }
+class Labrador implements Dog {
+    public void eat() { System.out.println("Eating..."); }
+    public void bark() { System.out.println("Barking..."); }
+}
+public class Main {
+    public static void main(String[] args) { Labrador l = new Labrador(); l.eat(); l.bark(); }
+}`,'Eating...\nBarking...'),
+P('Real-World Application Using Interfaces',String.raw`interface Payment { void pay(int amount); }
+class UPI implements Payment { public void pay(int a) { System.out.println("Paid " + a + " using UPI"); } }
+class Card implements Payment { public void pay(int a) { System.out.println("Paid " + a + " using Credit Card"); } }
+public class Main {
+    public static void main(String[] args) {
+        Payment p;
+        p = new UPI();  p.pay(500);
+        p = new Card(); p.pay(1200);
+    }
+}`,'Paid 500 using UPI\nPaid 1200 using Credit Card')]},
+10:{t:'Exceptions & Byte Streams',p:[
+P('try and catch: Division by Zero',String.raw`public class DivZero {
+    public static void main(String[] args) {
+        try {
+            int c = 10 / 0;
+            System.out.println(c);
+        } catch (ArithmeticException e) {
+            System.out.println("Exception caught: " + e.getMessage());
+        }
+    }
+}`,'Exception caught: / by zero'),
+P('Different Types of Exceptions',String.raw`public class Types {
+    public static void main(String[] args) {
+        try { int a = 5 / 0; }
+        catch (ArithmeticException e) { System.out.println("ArithmeticException: " + e.getMessage()); }
+        try { int[] arr = new int[3]; arr[5] = 1; }
+        catch (ArrayIndexOutOfBoundsException e) { System.out.println("ArrayIndexOutOfBoundsException: " + e.getMessage()); }
+        try { String s = null; s.length(); }
+        catch (NullPointerException e) { System.out.println("NullPointerException caught"); }
+    }
+}`,'ArithmeticException: / by zero\nArrayIndexOutOfBoundsException: Index 5 out of bounds for length 3\nNullPointerException caught'),
+P('Uncaught Exception and Stack Trace',String.raw`public class Uncaught {
+    public static void main(String[] args) {
+        int r = 10 / 0;
+        System.out.println(r);
+    }
+}`,'Exception in thread "main" java.lang.ArithmeticException: / by zero\n\tat Uncaught.main(Uncaught.java:3)'),
+P('Multiple Catch Clauses',String.raw`public class MultiCatch {
+    public static void main(String[] args) {
+        try {
+            int[] a = new int[3];
+            a[5] = 10;
+        } catch (ArithmeticException e) {
+            System.out.println("Arithmetic error");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Array error: " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("General error");
+        }
+    }
+}`,'Array error: Index 5 out of bounds for length 3'),
+P('throw Statement',String.raw`public class ThrowDemo {
+    public static void main(String[] args) {
+        int age = 15;
+        try {
+            if (age < 18) throw new ArithmeticException("Not eligible to vote");
+            System.out.println("Eligible to vote");
+        } catch (ArithmeticException e) {
+            System.out.println("Caught: " + e.getMessage());
+        }
+    }
+}`,'Caught: Not eligible to vote'),
+P('throws Keyword',String.raw`public class ThrowsDemo {
+    static void check(int n) throws Exception {
+        if (n < 0) throw new Exception("Negative number");
+        System.out.println("Number is valid: " + n);
+    }
+    public static void main(String[] args) {
+        try {
+            check(10);
+            check(-5);
+        } catch (Exception e) {
+            System.out.println("Propagated to main: " + e.getMessage());
+        }
+    }
+}`,'Number is valid: 10\nPropagated to main: Negative number'),
+P('finally Block',String.raw`public class FinallyDemo {
+    public static void main(String[] args) {
+        try {
+            System.out.println("Result = " + (10 / 2));
+        } finally {
+            System.out.println("Finally block executed (no exception)");
+        }
+        try {
+            System.out.println(10 / 0);
+        } catch (ArithmeticException e) {
+            System.out.println("Exception caught");
+        } finally {
+            System.out.println("Finally block executed (exception)");
+        }
+    }
+}`,'Result = 5\nFinally block executed (no exception)\nException caught\nFinally block executed (exception)'),
+P('User-Defined Exception',String.raw`class LowBalanceException extends Exception {
+    LowBalanceException(String msg) { super(msg); }
+}
+public class Custom {
+    public static void main(String[] args) {
+        try {
+            double balance = 300;
+            if (balance < 500) throw new LowBalanceException("Balance is below minimum");
+        } catch (LowBalanceException e) {
+            System.out.println("Caught: " + e.getMessage());
+        }
+    }
+}`,'Caught: Balance is below minimum'),
+P('Validate Marks: Custom Exception',String.raw`class InvalidMarksException extends Exception {
+    InvalidMarksException(String msg) { super(msg); }
+}
+public class Marks {
+    static void validate(int m) throws InvalidMarksException {
+        if (m < 0 || m > 100) throw new InvalidMarksException("Invalid marks: " + m + " (must be 0-100)");
+        System.out.println("Marks " + m + " are valid");
+    }
+    public static void main(String[] args) {
+        try { validate(85); validate(105); }
+        catch (InvalidMarksException e) { System.out.println(e.getMessage()); }
+    }
+}`,'Marks 85 are valid\nInvalid marks: 105 (must be 0-100)'),
+P('try, catch, throw, throws and finally Together',String.raw`public class Combined {
+    static void check(int n) throws Exception {
+        if (n < 0) throw new Exception("Negative value");
+    }
+    static void test(int n, int idx) {
+        try {
+            check(n);
+            int[] a = new int[2];
+            a[idx] = 1;
+            System.out.println("Success");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Array error: " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        } finally {
+            System.out.println("Done");
+        }
+    }
+    public static void main(String[] args) {
+        test(5, 1); test(5, 3); test(-1, 0);
+    }
+}`,'Success\nDone\nArray error: Index 3 out of bounds for length 2\nDone\nError: Negative value\nDone'),
+P('Byte Streams: InputStream and OutputStream',String.raw`import java.io.*;
+public class StreamDemo {
+    public static void main(String[] args) throws IOException {
+        InputStream in = new ByteArrayInputStream("Java".getBytes());
+        OutputStream out = System.out;
+        int b;
+        while ((b = in.read()) != -1) out.write(b);
+        out.write('\n');
+        out.flush();
+    }
+}`,'Java'),
+P('Read a File Using FileInputStream',String.raw`import java.io.*;
+public class ReadBytes {
+    public static void main(String[] args) throws IOException {
+        FileOutputStream fo = new FileOutputStream("input.txt");
+        fo.write("Hello Java".getBytes()); fo.close();
+        FileInputStream fi = new FileInputStream("input.txt");
+        int b;
+        while ((b = fi.read()) != -1) System.out.print((char) b);
+        fi.close();
+    }
+}`,'Hello Java'),
+P('Write a File Using FileOutputStream',String.raw`import java.io.*;
+public class WriteBytes {
+    public static void main(String[] args) throws IOException {
+        FileOutputStream fo = new FileOutputStream("data.txt");
+        fo.write("Java Lab".getBytes()); fo.close();
+        System.out.println("Data written to file");
+        FileInputStream fi = new FileInputStream("data.txt");
+        int b; System.out.print("File contents: ");
+        while ((b = fi.read()) != -1) System.out.print((char) b);
+        fi.close();
+    }
+}`,'Data written to file\nFile contents: Java Lab'),
+P('Copy a File Using Byte Streams',String.raw`import java.io.*;
+public class CopyFile {
+    public static void main(String[] args) throws IOException {
+        FileOutputStream src = new FileOutputStream("source.txt");
+        src.write("Copying with byte streams".getBytes()); src.close();
+        FileInputStream in = new FileInputStream("source.txt");
+        FileOutputStream out = new FileOutputStream("dest.txt");
+        int b;
+        while ((b = in.read()) != -1) out.write(b);
+        in.close(); out.close();
+        System.out.println("File copied successfully");
+        FileInputStream chk = new FileInputStream("dest.txt");
+        System.out.print("Contents: ");
+        while ((b = chk.read()) != -1) System.out.print((char) b);
+        chk.close();
+    }
+}`,'File copied successfully\nContents: Copying with byte streams'),
+P('Copy an Image with try-catch-finally',String.raw`import java.io.*;
+public class CopyImage {
+    public static void main(String[] args) {
+        FileInputStream in = null; FileOutputStream out = null;
+        try {
+            in = new FileInputStream("photo.jpg");      // photo.jpg must exist in the folder
+            out = new FileOutputStream("photo_copy.jpg");
+            int b;
+            while ((b = in.read()) != -1) out.write(b);
+            System.out.println("Image copied successfully");
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found: " + e.getMessage());
+        } catch (IOException e) {
+            System.out.println("I/O error: " + e.getMessage());
+        } finally {
+            try { if (in != null) in.close(); if (out != null) out.close(); } catch (IOException e) { }
+            System.out.println("Streams closed");
+        }
+    }
+}`,'Image copied successfully\nStreams closed')]},
+11:{t:'Character Streams & Threads',p:[
+P('Reader and Writer from Keyboard',String.raw`import java.io.*;
+public class ReaderWriter {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        Writer w = new PrintWriter(System.out);
+        w.write("Enter text: "); w.flush();
+        String s = br.readLine();
+        w.write("You typed: " + s + "\n"); w.flush();
+    }
+}`,'Enter text: Hello Java   (typed by the user)\nYou typed: Hello Java'),
+P('Read a File Using FileReader',String.raw`import java.io.*;
+public class ReadChars {
+    public static void main(String[] args) throws IOException {
+        FileWriter fw = new FileWriter("text.txt"); fw.write("Hello from file"); fw.close();
+        FileReader fr = new FileReader("text.txt");
+        int c;
+        while ((c = fr.read()) != -1) System.out.print((char) c);
+        fr.close();
+    }
+}`,'Hello from file'),
+P('Write Text Using FileWriter',String.raw`import java.io.*;
+public class WriteChars {
+    public static void main(String[] args) throws IOException {
+        FileWriter fw = new FileWriter("notes.txt");
+        fw.write("Java character streams");
+        fw.close();
+        System.out.println("Text written to file successfully");
+    }
+}`,'Text written to file successfully'),
+P('Copy a Text File: FileReader and FileWriter',String.raw`import java.io.*;
+public class CopyText {
+    public static void main(String[] args) throws IOException {
+        FileWriter w = new FileWriter("a.txt"); w.write("Copy this text"); w.close();
+        FileReader fr = new FileReader("a.txt");
+        FileWriter fw = new FileWriter("b.txt");
+        int c;
+        while ((c = fr.read()) != -1) fw.write(c);
+        fr.close(); fw.close();
+        System.out.println("Text file copied");
+        FileReader chk = new FileReader("b.txt");
+        System.out.print("Contents: ");
+        while ((c = chk.read()) != -1) System.out.print((char) c);
+        chk.close();
+    }
+}`,'Text file copied\nContents: Copy this text'),
+P('Count Characters, Words and Lines',String.raw`import java.io.*;
+public class Count {
+    public static void main(String[] args) throws IOException {
+        FileWriter fw = new FileWriter("count.txt");
+        fw.write("Java is fun\nCharacter streams work"); fw.close();
+        FileReader fr = new FileReader("count.txt");
+        int c, chars = 0, words = 0, lines = 0, last = -1; boolean in = false;
+        while ((c = fr.read()) != -1) {
+            chars++; last = c;
+            if (c == '\n') lines++;
+            if (c == ' ' || c == '\n') in = false;
+            else if (!in) { in = true; words++; }
+        }
+        if (chars > 0 && last != '\n') lines++;
+        fr.close();
+        System.out.println("Characters: " + chars);
+        System.out.println("Words: " + words);
+        System.out.println("Lines: " + lines);
+    }
+}`,'Characters: 34\nWords: 6\nLines: 2'),
+P('Main Thread',String.raw`public class MainThread {
+    public static void main(String[] args) {
+        Thread t = Thread.currentThread();
+        System.out.println("Name: " + t.getName());
+        System.out.println("Priority: " + t.getPriority());
+        System.out.println("State: " + t.getState());
+    }
+}`,'Name: main\nPriority: 5\nState: RUNNABLE'),
+P('Create a Thread: Extending Thread',String.raw`class MyThread extends Thread {
+    public void run() { System.out.println("Thread running: " + getName()); }
+}
+public class Main {
+    public static void main(String[] args) { new MyThread().start(); }
+}`,'Thread running: Thread-0'),
+P('Create a Thread: Implementing Runnable',String.raw`class Task implements Runnable {
+    public void run() { System.out.println("Runnable running in " + Thread.currentThread().getName()); }
+}
+public class Main {
+    public static void main(String[] args) { new Thread(new Task(), "Worker-1").start(); }
+}`,'Runnable running in Worker-1'),
+P('Multiple Threads: Concurrent Execution',String.raw`class Worker extends Thread {
+    String id; int delay;
+    Worker(String id, int delay) { this.id = id; this.delay = delay; }
+    public void run() {
+        try {
+            Thread.sleep(delay);
+            for (int i = 1; i <= 3; i++) { System.out.println(id + i); Thread.sleep(200); }
+        } catch (InterruptedException e) { }
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        new Worker("A", 0).start();
+        new Worker("B", 100).start();
+    }
+}`,'A1\nB1\nA2\nB2\nA3\nB3\n(order depends on thread scheduling; timing delays keep it steady)'),
+P('isAlive() Method',String.raw`class Job extends Thread {
+    public void run() { try { Thread.sleep(200); } catch (InterruptedException e) { } }
+}
+public class Main {
+    public static void main(String[] args) throws InterruptedException {
+        Job t = new Job();
+        System.out.println("Before start: " + t.isAlive());
+        t.start();
+        System.out.println("After start: " + t.isAlive());
+        t.join();
+        System.out.println("After join: " + t.isAlive());
+    }
+}`,'Before start: false\nAfter start: true\nAfter join: false'),
+P('join() Method',String.raw`class Child extends Thread {
+    public void run() {
+        System.out.println("Child thread started");
+        try { Thread.sleep(300); } catch (InterruptedException e) { }
+        System.out.println("Child thread finished");
+    }
+}
+public class Main {
+    public static void main(String[] args) throws InterruptedException {
+        Child c = new Child();
+        c.start();
+        c.join();
+        System.out.println("Main continues after join");
+    }
+}`,'Child thread started\nChild thread finished\nMain continues after join'),
+P('Multiple Threads with isAlive() and join()',String.raw`class T extends Thread {
+    String id; int ms;
+    T(String id, int ms) { this.id = id; this.ms = ms; }
+    public void run() {
+        try { Thread.sleep(ms); } catch (InterruptedException e) { }
+        System.out.println(id + " finished");
+    }
+}
+public class Main {
+    public static void main(String[] args) throws InterruptedException {
+        T t1 = new T("T1", 200), t2 = new T("T2", 400);
+        t1.start(); t2.start();
+        System.out.println("T1 alive: " + t1.isAlive());
+        System.out.println("T2 alive: " + t2.isAlive());
+        t1.join(); t2.join();
+        System.out.println("T1 alive: " + t1.isAlive());
+        System.out.println("T2 alive: " + t2.isAlive());
+        System.out.println("All threads completed");
+    }
+}`,'T1 alive: true\nT2 alive: true\nT1 finished\nT2 finished\nT1 alive: false\nT2 alive: false\nAll threads completed')]},
+12:{t:'Synchronization & Lambdas',p:[
+P('Thread Priorities',String.raw`class P extends Thread {
+    P(String n) { super(n); }
+    public void run() { System.out.println(getName() + " priority = " + getPriority()); }
+}
+public class Main {
+    public static void main(String[] args) throws InterruptedException {
+        P a = new P("Low"), b = new P("Medium"), c = new P("High");
+        a.setPriority(Thread.MIN_PRIORITY);
+        b.setPriority(Thread.NORM_PRIORITY);
+        c.setPriority(Thread.MAX_PRIORITY);
+        a.start(); a.join(); b.start(); b.join(); c.start(); c.join();
+    }
+}`,'Low priority = 1\nMedium priority = 5\nHigh priority = 10'),
+P('Three Threads with Different Priorities',String.raw`class Job extends Thread {
+    Job(String n, int p) { super(n); setPriority(p); }
+    public void run() { System.out.println(getName() + " (priority " + getPriority() + ") running"); }
+}
+public class Main {
+    public static void main(String[] args) {
+        new Job("Thread-High", 10).start();
+        new Job("Thread-Normal", 5).start();
+        new Job("Thread-Low", 1).start();
+        // Order depends on the OS scheduler and can differ between runs
+    }
+}`,'Thread-High (priority 10) running\nThread-Normal (priority 5) running\nThread-Low (priority 1) running\n(order may vary between runs)'),
+P('Synchronized Method',String.raw`class Counter {
+    int count = 0;
+    synchronized void increment() { count++; }
+}
+public class Main {
+    public static void main(String[] args) throws InterruptedException {
+        Counter c = new Counter();
+        Runnable r = () -> { for (int i = 0; i < 1000; i++) c.increment(); };
+        Thread t1 = new Thread(r), t2 = new Thread(r);
+        t1.start(); t2.start(); t1.join(); t2.join();
+        System.out.println("Final count = " + c.count);
+    }
+}`,'Final count = 2000'),
+P('Synchronized Block',String.raw`class Counter {
+    int count = 0;
+    void increment() { synchronized (this) { count++; } }
+}
+public class Main {
+    public static void main(String[] args) throws InterruptedException {
+        Counter c = new Counter();
+        Runnable r = () -> { for (int i = 0; i < 500; i++) c.increment(); };
+        Thread[] t = { new Thread(r), new Thread(r), new Thread(r) };
+        for (Thread x : t) x.start();
+        for (Thread x : t) x.join();
+        System.out.println("Final count = " + c.count);
+    }
+}`,'Final count = 1500'),
+P('Race Condition and Synchronization',String.raw`class Unsafe { int n = 0; void inc() { n++; } }
+class Safe { int n = 0; synchronized void inc() { n++; } }
+public class Main {
+    public static void main(String[] args) throws InterruptedException {
+        Unsafe u = new Unsafe(); Safe s = new Safe();
+        Runnable r = () -> { for (int i = 0; i < 1000; i++) { u.inc(); s.inc(); } };
+        Thread t1 = new Thread(r), t2 = new Thread(r);
+        t1.start(); t2.start(); t1.join(); t2.join();
+        System.out.println("Without synchronization: " + u.n);
+        System.out.println("With synchronization: " + s.n);
+    }
+}`,'Without synchronization: 1873   (varies each run, often less than 2000)\nWith synchronization: 2000'),
+P('Synchronized Ticket Booking System',String.raw`class Theatre {
+    int available = 5;
+    synchronized void book(String name, int n) {
+        if (available >= n) { available -= n; System.out.println(name + " booked " + n + " ticket(s). Remaining: " + available); }
+        else System.out.println("Sorry " + name + ", only " + available + " ticket(s) left");
+    }
+}
+class Booker extends Thread {
+    Theatre t; String name; int n;
+    Booker(Theatre t, String name, int n) { this.t = t; this.name = name; this.n = n; }
+    public void run() { t.book(name, n); }
+}
+public class Main {
+    public static void main(String[] args) throws InterruptedException {
+        Theatre t = new Theatre();
+        new Booker(t, "Harika", 2).start(); Thread.sleep(100);
+        new Booker(t, "Anusha", 2).start(); Thread.sleep(100);
+        new Booker(t, "Meghana", 2).start();
+    }
+}`,'Harika booked 2 ticket(s). Remaining: 3\nAnusha booked 2 ticket(s). Remaining: 1\nSorry Meghana, only 1 ticket(s) left'),
+P('Lambda: Functional Interface Calculator',String.raw`interface Calculator { int operate(int a, int b); }
+public class Main {
+    public static void main(String[] args) {
+        Calculator add = (a, b) -> a + b;
+        Calculator sub = (a, b) -> a - b;
+        Calculator mul = (a, b) -> a * b;
+        Calculator div = (a, b) -> a / b;
+        System.out.println("Add = " + add.operate(20, 5));
+        System.out.println("Sub = " + sub.operate(20, 5));
+        System.out.println("Mul = " + mul.operate(20, 5));
+        System.out.println("Div = " + div.operate(20, 5));
+    }
+}`,'Add = 25\nSub = 15\nMul = 100\nDiv = 4'),
+P('Lambda: Single and Multiple Parameters',String.raw`interface Square { int calc(int x); }
+interface Sum { int calc(int a, int b); }
+public class Main {
+    public static void main(String[] args) {
+        Square sq = x -> x * x;
+        Sum sum = (a, b) -> a + b;
+        System.out.println("Square of 6 = " + sq.calc(6));
+        System.out.println("Sum = " + sum.calc(7, 8));
+    }
+}`,'Square of 6 = 36\nSum = 15'),
+P('Block Lambda: Multiple Statements',String.raw`interface NumOp { int run(int n); }
+public class Main {
+    public static void main(String[] args) {
+        NumOp fact = n -> {
+            int f = 1;
+            for (int i = 1; i <= n; i++) f *= i;
+            return f;
+        };
+        System.out.println("Factorial of 5 = " + fact.run(5));
+    }
+}`,'Factorial of 5 = 120'),
+P('Block Lambda: Largest of Two Numbers',String.raw`interface Max { int find(int a, int b); }
+public class Main {
+    public static void main(String[] args) {
+        Max m = (a, b) -> {
+            if (a > b) return a;
+            else return b;
+        };
+        System.out.println("Largest = " + m.find(25, 40));
+    }
+}`,'Largest = 40'),
+P('Generic Functional Interface',String.raw`interface Operation<T> { T apply(T t); }
+public class Main {
+    public static void main(String[] args) {
+        Operation<Integer> sq = x -> x * x;
+        Operation<String> up = s -> s.toUpperCase();
+        Operation<Double> half = d -> d / 2;
+        System.out.println(sq.apply(7));
+        System.out.println(up.apply("java"));
+        System.out.println(half.apply(9.0));
+    }
+}`,'49\nJAVA\n4.5'),
+P('Generic Functional Interface: Two Values',String.raw`interface BiOp<T> { T op(T a, T b); }
+public class Main {
+    public static void main(String[] args) {
+        BiOp<Integer> add = (a, b) -> a + b;
+        BiOp<String> join = (a, b) -> a + b;
+        BiOp<Double> mul = (a, b) -> a * b;
+        System.out.println(add.op(10, 20));
+        System.out.println(join.op("Hello ", "Java"));
+        System.out.println(mul.op(2.5, 4.0));
+    }
+}`,'30\nHello Java\n10.0'),
+P('Lambda with ArrayList: Display and Filter',String.raw`import java.util.*;
+public class Main {
+    public static void main(String[] args) {
+        List<Integer> list = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
+        System.out.print("All elements: ");
+        list.forEach(n -> System.out.print(n + " "));
+        System.out.print("\nEven numbers: ");
+        list.stream().filter(n -> n % 2 == 0).forEach(n -> System.out.print(n + " "));
+    }
+}`,'All elements: 1 2 3 4 5 6 7 8 9 10 \nEven numbers: 2 4 6 8 10 '),
+P('Sorting Using Lambda Expressions',String.raw`import java.util.*;
+public class Main {
+    public static void main(String[] args) {
+        List<Integer> nums = new ArrayList<>(Arrays.asList(5, 2, 8, 1, 9));
+        List<String> names = new ArrayList<>(Arrays.asList("Banana", "Apple", "Cherry"));
+        nums.sort((a, b) -> a - b);
+        names.sort((a, b) -> a.compareTo(b));
+        System.out.println("Sorted integers: " + nums);
+        System.out.println("Sorted strings: " + names);
+    }
+}`,'Sorted integers: [1, 2, 5, 8, 9]\nSorted strings: [Apple, Banana, Cherry]'),
+P('Thread Using Lambda Expression',String.raw`public class Main {
+    public static void main(String[] args) throws InterruptedException {
+        Thread t = new Thread(() -> System.out.println("Thread running using lambda"));
+        t.start();
+        t.join();
+    }
+}`,'Thread running using lambda')]}
+};
+const ch=document.getElementById('ch'),m=document.getElementById('m');
+ch.innerHTML='<a href="#home" data-k="home">Home</a>'+Object.keys(W).map(k=>`<a href="#w${k}" data-k="w${k}">Week ${k}</a>`).join('');
+const esc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;');
+const cnt=Object.values(W).reduce((n,x)=>n+(x.p?x.p.length:0),0);
+const sub=k=>W[k].p?W[k].p.length+' programs':(W[k].h&&k<3?'Reference':'No task');
+function copy(i){navigator.clipboard.writeText(window.__c);const b=document.getElementById('cb');b.textContent='Copied ✓';setTimeout(()=>b.textContent='Copy code',1500)}
+function route(){
+ const [w,p]=(location.hash.slice(1)||'home').split('/');
+ ch.querySelectorAll('a').forEach(a=>a.classList.toggle('on',a.dataset.k===w));scrollTo(0,0);
+ if(w==='home'){m.innerHTML=`<div class="hero"><img class="pic" src="data:image/jpeg;base64,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" alt="K.Harika"><div><h1>Hi, I'm <span>K.Harika</span></h1><p>Java Lab Portfolio: weekly experiments, programs and outputs.</p><div class="tags"><b>🎓 Roll No: 25EU02087</b><b>📘 II Year</b><b>🤖 AI&amp;ML</b><b>Section B</b><b>☕ Java Programming</b></div></div></div>
+ <div class="stats"><div><big>${Object.keys(W).length}</big><small>Weeks</small></div><div><big>${cnt}</big><small>Programs</small></div><div><big>100%</big><small>With outputs</small></div></div>
+ <h2>Weekly Experiments</h2><div class="grid">${Object.keys(W).map(k=>`<a class="card" href="#w${k}"><small>WEEK ${k}</small><h3>${W[k].t}</h3><p>${sub(k)}</p></a>`).join('')}</div>`;return}
+ const d=W[w.slice(1)];if(!d)return;const n=w.slice(1);
+ if(d.h){m.innerHTML=`<div class="crumb"><a href="#home">Home</a> / Week ${n}</div><h2>Week ${n}: ${d.t}</h2>${d.h}`;return}
+ if(p===undefined){m.innerHTML=`<div class="crumb"><a href="#home">Home</a> / Week ${n}</div><h2>Week ${n}: ${d.t}</h2><div class="grid">${d.p.map((x,i)=>`<a class="card" href="#${w}/${i}"><small>PROGRAM ${i+1}</small><h3>${x.t}</h3></a>`).join('')}</div>`;return}
+ const i=+p,x=d.p[i];window.__c=x.c;
+ m.innerHTML=`<div class="crumb"><a href="#home">Home</a> / <a href="#${w}">Week ${n}</a> / Program ${i+1}</div><h2>${x.t}</h2><div class="bar"><span>Code</span><button id="cb" onclick="copy()">Copy code</button></div><pre>${esc(x.c)}</pre><div class="bar"><span>Output</span></div><pre class="out">${esc(x.o)}</pre>
+ <div class="pn">${i>0?`<a href="#${w}/${i-1}"><button>← Previous</button></a>`:'<span></span>'}<a href="#${w}"><button>All programs</button></a>${i<d.p.length-1?`<a href="#${w}/${i+1}"><button>Next →</button></a>`:'<span></span>'}</div>`;
+}
+addEventListener('hashchange',route);route();
+</script></body></html>
